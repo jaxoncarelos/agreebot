@@ -98,11 +98,11 @@ pub async fn forward_message_as_webhook(
                 .unwrap_or_else(|| original_message.author.default_avatar_url()),
         )
         .content(format!(
-            "[Goto →](https://discord.com/channels/{}/{}/{})\n{}",
+            "{}\n[Learn More →](https://discord.com/channels/{}/{}/{})",
+            &original_message.content,
             &guild_id,
             &original_message.channel_id.get(),
             &original_message.id.get(),
-            &original_message.content,
         ));
     println!(
         "{} {} {}",

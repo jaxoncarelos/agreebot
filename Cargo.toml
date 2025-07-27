@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [target.x86_64-unknown-linux-gnu]
-linker = "x86_64-linux-musl-gcc"
+image = "ghcr.io/cross-rs/x86_64-unknown-linux-gnu:main"
 
 [dependencies]
 dotenv = "0.15.0"

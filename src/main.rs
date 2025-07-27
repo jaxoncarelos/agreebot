@@ -1,7 +1,7 @@
 use dotenv::dotenv;
 use serenity::all::{
-    ChannelId, Context, CreateMessage, EventHandler, GatewayIntents, GuildId, Message, MessageId,
-    MessageReference, MessageReferenceKind, Reaction, ReactionType,
+    ChannelId, ComponentType, Context, CreateMessage, EventHandler, GatewayIntents, GuildId,
+    Message, MessageId, MessageReference, MessageReferenceKind, Reaction, ReactionType,
 };
 use serenity::async_trait;
 use std::collections::HashMap;
