@@ -1,12 +1,11 @@
-FROM rust:latest
-
+# Build stage
+FROM rust:latest as builder
 WORKDIR /usr/src/app
-
-# Copy all files
 COPY . .
-
-# Build release binary
 RUN cargo build --release
 
-# Run the binary (adjust name if different)
-CMD ["./target/release/agreeboard"]
+# Final stage: minimal image with just the binary
+FROM ubuntu:latest
+WORKDIR /app
+COPY --from=builder /usr/src/app/target/release/agreeboard .
+CMD ["./agreeboard"]
