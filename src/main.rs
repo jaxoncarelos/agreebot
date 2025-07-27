@@ -1,7 +1,7 @@
 use dotenv::dotenv;
 use serenity::all::{
-    ChannelId, Context, CreateMessage, EventHandler, GatewayIntents, GuildId, Message, MessageId, MessageReference,
-    MessageReferenceKind, Reaction, ReactionType,
+    ChannelId, Context, CreateMessage, EventHandler, GatewayIntents, GuildId, Message, MessageId,
+    MessageReference, MessageReferenceKind, Reaction, ReactionType,
 };
 use serenity::async_trait;
 use std::collections::HashMap;
@@ -18,7 +18,7 @@ struct Handler {
 }
 
 const EMOJI_AGREE: u64 = 230782152164245505;
-const COUNT_THRESHOLD: u64 = 1;
+const COUNT_THRESHOLD: u64 = 4;
 const MESSAGE_TIME_PASSED_THRESHOLD: u64 = 3;
 
 #[async_trait]
