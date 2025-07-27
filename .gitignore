@@ -2,3 +2,5 @@ target
 .env
 .idea
 channel_id.db
+deploy.sh
+Dockerfile

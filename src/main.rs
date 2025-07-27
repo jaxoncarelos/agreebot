@@ -99,6 +99,10 @@ impl EventHandler for Handler {
 
             let Some(channel_id) = channel_id else { return };
 
+            if reaction.channel_id.get() == channel_id.get() {
+                return;
+            }
+
             if !message.components.is_empty() {
                 channel_id
                     .send_message(
