@@ -21,6 +21,14 @@ const EMOJI_AGREE: u64 = 230782152164245505;
 const COUNT_THRESHOLD: u64 = 4;
 const MESSAGE_TIME_PASSED_THRESHOLD: u64 = 3;
 
+fn is_agree_emoji(emoji: &ReactionType) -> bool {
+    match emoji {
+        ReactionType::Custom { id, .. } if id.get() == EMOJI_AGREE => true,
+        ReactionType::Unicode(emoji) if emoji == "✅" => true,
+        _ => false,
+    }
+}
+
 #[async_trait]
 impl EventHandler for Handler {
     async fn message(&self, ctx: Context, new_message: Message) {
@@ -54,10 +62,8 @@ impl EventHandler for Handler {
         }
     }
     async fn reaction_add(&self, ctx: Context, reaction: Reaction) {
-        if let ReactionType::Custom { ref id, .. } = reaction.emoji {
-            if id.get() != EMOJI_AGREE {
-                return;
-            }
+        if !is_agree_emoji(&reaction.emoji) {
+            return;
         }
         println!("Valid reaction added!");
         let reaction_count: u64 = reaction
@@ -66,13 +72,7 @@ impl EventHandler for Handler {
             .unwrap()
             .reactions
             .iter()
-            .find(|reaction| {
-                if let ReactionType::Custom { ref id, .. } = reaction.reaction_type {
-                    id.get() == EMOJI_AGREE
-                } else {
-                    false
-                }
-            })
+            .find(|reaction| is_agree_emoji(&reaction.reaction_type))
             .unwrap()
             .count;
         println!("Count of {}", reaction_count);
